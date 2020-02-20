@@ -26,7 +26,7 @@ namespace ECommerceShop.Repository
             _DBEntity.SaveChanges();
         }
 
-        public int GetAllrecordCount()
+        public int GetAllRecordCount()
         {
             return _dbSet.Count();
         }
@@ -36,17 +36,17 @@ namespace ECommerceShop.Repository
             return _dbSet.ToList();
         }
 
-        public IQueryable<Tbl_Entity> GetAllRecordsQueryable()
+        public IQueryable<Tbl_Entity> GetAllRecordsIQueryable()
         {
             return _dbSet;
         }
 
-        public Tbl_Entity GetFirstorDefault(int recordId)
+        public Tbl_Entity GetFirstOrDefault(int recordId)
         {
             return _dbSet.Find(recordId);
         }
 
-        public Tbl_Entity GetFirstorDefaultByParameter(Expression<Func<Tbl_Entity, bool>> wherePredict)
+        public Tbl_Entity GetFirstOrDefaultByParameter(Expression<Func<Tbl_Entity, bool>> wherePredict)
         {
             return _dbSet.Where(wherePredict).FirstOrDefault();
         }
@@ -56,7 +56,7 @@ namespace ECommerceShop.Repository
             return _dbSet.Where(wherePredict).ToList();
         }
 
-        public IEnumerable<Tbl_Entity> GetResultBySqlprocedure(string query, params object[] parameters)
+        public IEnumerable<Tbl_Entity> GetResultBySqlProcedure(string query, params object[] parameters)
         {
             if (parameters != null)
             {
@@ -82,13 +82,13 @@ namespace ECommerceShop.Repository
             _dbSet.Remove(entity);
         }
 
-        public void RemovebyWhereClause(Expression<Func<Tbl_Entity, bool>> wherePredict)
+        public void RemoveByWhereClause(Expression<Func<Tbl_Entity, bool>> wherePredict)
         {
             Tbl_Entity entity = _dbSet.Where(wherePredict).FirstOrDefault();
             Remove(entity);
         }
 
-        public void RemoveRangeBywhereClause(Expression<Func<Tbl_Entity, bool>> wherePredict)
+        public void RemoveRangeByWhereClause(Expression<Func<Tbl_Entity, bool>> wherePredict)
         {
             List<Tbl_Entity> entity = _dbSet.Where(wherePredict).ToList();
             foreach (var ent in entity)
