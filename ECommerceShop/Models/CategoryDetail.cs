@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace ECommerceShop.Models
 {
-    public class CategoryDetail
+    public class CategoryDetails
     {
         public int CategoryId { get; set; }
         [Required(ErrorMessage = "Category Name is Required")]
@@ -17,7 +17,7 @@ namespace ECommerceShop.Models
         public Nullable<bool> IsDeleted { get; set; }
     }
 
-    public class ProductDetail
+    public class ProductDetails
     {
         public int ProductId { get; set; }
         [Required(ErrorMessage = "Product Name is Required")]

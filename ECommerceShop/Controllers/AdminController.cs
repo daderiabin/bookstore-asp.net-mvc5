@@ -69,7 +69,7 @@ namespace ECommerceShop.Controllers
         }
 
         public ActionResult AddProduct()
-        {
+        {            
             return View();
         }
 
@@ -77,6 +77,30 @@ namespace ECommerceShop.Controllers
         public ActionResult AddProduct(Tbl_Product tbl)
         {
             _unitOfWork.GetRepositoryInstance<Tbl_Product>().Add(tbl);
+            return RedirectToAction("Products");
+        }
+
+        public ActionResult EditProduct(int productId)
+        {
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Product>().GetFirstOrDefault(productId));
+        }
+
+        [HttpPost]
+        public ActionResult EditProduct(Tbl_Product tbl)
+        {
+            _unitOfWork.GetRepositoryInstance<Tbl_Product>().Update(tbl);
+            return RedirectToAction("Products");
+        }
+
+        public ActionResult DeleteProduct(int productId)
+        {
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Product>().GetFirstOrDefault(productId));
+        }
+
+        [HttpPost]
+        public ActionResult DeleteProduct(Tbl_Product tbl)
+        {
+            _unitOfWork.GetRepositoryInstance<Tbl_Product>().Remove(tbl);
             return RedirectToAction("Products");
         }
     }
