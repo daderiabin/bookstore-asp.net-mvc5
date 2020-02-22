@@ -11,7 +11,10 @@
             <li class="breadcrumb-item active">Categories</li>
         </ol>
         <div class="card mb-4">
-            <div class="card-header"><i class="fas fa-table mr-1"></i>Category Details</div>
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>Category Details
+                <a href="../Admin/AddCategory" class="btn btn-info" style="float:right !important;"><i class="fas fa-plus"></i> Add New</a>
+            </div>            
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -35,7 +38,7 @@
                                 <tr>
                                     <td>@(Model.IndexOf(cat) + 1)</td>
                                     <td>@cat.CategoryName</td>
-                                    <td><a href="#">Edit</a></td>
+                                    <td>@Html.ActionLink("Edit", "EditCategory", new { categoryId = cat.CategoryId }) / @Html.ActionLink("Delete", "DeleteCategory", new { categoryId = cat.CategoryId })</td>
                                 </tr>
                             }
                         </tbody>
