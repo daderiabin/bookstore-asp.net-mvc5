@@ -15,6 +15,19 @@ namespace ECommerceShop.Controllers
         // GET: Admin
         public GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
 
+        public List<SelectListItem> GetCategories()
+        {
+            List<SelectListItem> categories = new List<SelectListItem>();
+            var category = _unitOfWork.GetRepositoryInstance<Tbl_Category>().GetAllRecords();
+
+            foreach (var item in category)
+            {
+                categories.Add(new SelectListItem { Value = item.CategoryId.ToString(), Text = item.CategoryName });
+            }
+
+            return categories;
+        }
+
         public ActionResult Dashboard()
         {
             return View();
@@ -69,7 +82,8 @@ namespace ECommerceShop.Controllers
         }
 
         public ActionResult AddProduct()
-        {            
+        {
+            ViewBag.CategoryList = GetCategories();
             return View();
         }
 
@@ -82,6 +96,7 @@ namespace ECommerceShop.Controllers
 
         public ActionResult EditProduct(int productId)
         {
+            ViewBag.CategoryList = GetCategories();
             return View(_unitOfWork.GetRepositoryInstance<Tbl_Product>().GetFirstOrDefault(productId));
         }
 
