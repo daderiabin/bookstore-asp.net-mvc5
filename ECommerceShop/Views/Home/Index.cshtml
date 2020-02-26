@@ -82,6 +82,10 @@
                         <p>@product.Price $</p>
                         @if (product.Quantity > 0)
                         {
+                            using (Html.BeginForm("AddToCart", "Home", new { productId = product.ProductId }, FormMethod.Post))
+                            {
+                                <button type="submit" class="pull-right">+<i class="fa fa-shopping-cart"></i></button>
+                            }
                             <p>Available Now</p>
                         }
                         else

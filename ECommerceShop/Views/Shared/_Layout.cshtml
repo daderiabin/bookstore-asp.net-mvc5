@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using ECommerceShop.Models.Home;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -20,21 +21,51 @@
                 </div>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-6">
-                <div class="account">
-                    <ul>
-                        <li>
-                            <div class="hidden-xs">
-                                <h4>+1244-***-****</h4>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="visible-xs">
-                                <h4><a>Call</a></h4>
-                                <p>+1244-***-****</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                @*<div class="account">
+                        <ul>
+                            <li>
+                                <div class="hidden-xs">
+                                    <h4>+1244-***-****</h4>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="visible-xs">
+                                    <h4><a>Call</a></h4>
+                                    <p>+1244-***-****</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>*@
+                @{ 
+                    int count;
+                    if (Session["cart"] != null)
+                    {
+                        count = ((List<Item>)Session["cart"]).Count();
+                    }
+                    else
+                    {
+                        count = 0;
+                    }
+
+                }
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Cart(@count) <b class="cart"></b></a>
+                        <ul class="dropdown-menu">
+                            @if (Session["cart"] != null)
+                            {
+                                foreach (Item product in (List<Item>)Session["cart"])
+                                {
+                                    <li>
+                                        <a href="#">@product.Product.ProductName (@product.Quantity)</a>
+                                        <a href='@Url.Action("RemoveFromCart", "Home", new { productId = @product.Product.ProductId})'><i class="fa fa-times"></i></a>
+                                    </li>                                    
+                                }
+                            }
+                            <li class="divider"></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="row">
