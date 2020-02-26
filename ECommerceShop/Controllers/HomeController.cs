@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ECommerceShop.Models.Home;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,8 @@ namespace ECommerceShop.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            HomePageViewModel model = new HomePageViewModel();
+            return View(model.CreateModel());
         }
 
         public ActionResult About()

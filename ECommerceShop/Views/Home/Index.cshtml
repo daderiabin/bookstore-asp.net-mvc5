@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ECommerceShop.Models.Home.HomePageViewModel
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -59,59 +60,41 @@
     <div class="row">
         <div class="col-md-12">
             <div class="page-header">
-                <h2>Our Products <small>Trends</small></h2>
+                <h2>Our Products <small>Most Popular</small></h2>
             </div>
         </div>
     </div>
 
     <div class="row product-container">
-        <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px">
-            <div class="thumbnail product-item" style="height:300px">
-                <img class="img-responsive" title="View Product Details"
-                     style="cursor:pointer;height:175px;width:130px"
-                     src="~/Images/Products/1.jpg" />
-                <div class="caption">
-                    <h5>Book Title</h5>
-                    <p>12.50 $</p>
-                    <p>Available</p>
-                    <div class="product-item-badge">New</div>
+        @foreach (var product in Model.productList)
+        {
+            <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px">
+                <div class="thumbnail product-item" style="height:300px">
+                    <img class="img-responsive" title="View Product Details"
+                         style="cursor:pointer;height:175px;width:130px"
+                         src="~/Images/Products/@product.ProductImage" />
+                    <div class="caption">
+                        <h5>@product.ProductName</h5>
+                        <p>@product.Price $</p>
+                        @if (product.Quantity > 0)
+                        {
+                            <p>Available Now</p>
+                        }
+                        else
+                        {
+                            <p>Out of Stock</p>
+                        }
+                        @if (product.IsFeatured == true)
+                        {
+                            <div class="product-item-badge">New</div>
+                        }
+                        else
+                        {
+                            <div class="product-item-badge">Old</div>
+                        }
+
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px">
-            <div class="thumbnail product-item" style="height:300px">
-                <img class="img-responsive" title="View Product Details"
-                     style="cursor:pointer;height:175px;width:130px"
-                     src="~/Images/Products/12.jpg" />
-                <div class="caption">
-                    <h5>Book Title</h5>
-                    <p>12.50 $</p>
-                    <p>Available</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px">
-            <div class="thumbnail product-item" style="height:300px">
-                <img class="img-responsive" title="View Product Details"
-                     style="cursor:pointer;height:175px;width:130px"
-                     src="~/Images/Products/0.jpg" />
-                <div class="caption">
-                    <h5>Book Title</h5>
-                    <p>12.50 $</p>
-                    <p>Available</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px">
-            <div class="thumbnail product-item" style="height:300px">
-                <img class="img-responsive" title="View Product Details"
-                     style="cursor:pointer;height:175px;width:130px"
-                     src="~/Images/Products/2.jpg" />
-                <div class="caption">
-                    <h5>Book Title</h5>
-                    <p>12.50 $</p>
-                    <p>Available</p>
-                </div>
-            </div>
-        </div>
+        }
     </div>

@@ -11,7 +11,7 @@
                 <i class="fas fa-table mr-1"></i>Edit Product
             </div>
             <div class="card-body">
-                @using (Html.BeginForm())
+                @using (Html.BeginForm("EditProduct", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
 
@@ -73,7 +73,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.ProductImage, htmlAttributes: new { @class = "control-label" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.ProductImage, new { htmlAttributes = new { @class = "form-control" } })
+                                    <input type="file" name="file" id="file" style="width: 100%;" />
                                     @Html.ValidationMessageFor(model => model.ProductImage, "", new { @class = "text-danger" })
                                 </div>
                             </div>
