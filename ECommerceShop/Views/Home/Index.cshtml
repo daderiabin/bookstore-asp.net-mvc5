@@ -1,4 +1,6 @@
 ﻿@model ECommerceShop.Models.Home.HomePageViewModel
+@using PagedList;
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Home Page";
 }
@@ -45,18 +47,20 @@
         </a>
     </div>
 
-    <div class="olContent f1">
-        <h2 style="color:black">Search Product/Category</h2>
-    </div>
-    <div class="olSearch fr">
-        <input type="text" placeholder="Enter Keyword" name="searchKey" class="inputComn houseText form-control"/>
-        <div class="searchIcon">
-            <button type="button" class="searchBtn">
-                <i class="fa fa-search"></i>
-            </button>
+    <form method="post">
+        <div class="olContent f1">
+            <h4 style="color:black">Search Product/Category</h4>
         </div>
-    </div>
-
+        <div class="olSearch fr">
+            <input type="text" id="search" name="search" placeholder="Enter Keyword" class="inputComn houseText form-control" />
+            <div class="searchIcon">
+                <button type="submit" class="searchBtn">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+    
     <div class="row">
         <div class="col-md-12">
             <div class="page-header">
@@ -97,4 +101,7 @@
                 </div>
             </div>
         }
+    </div>
+    <div class="container">
+        @Html.PagedListPager(Model.productList, page => Url.Action("Index", new { page, search = Request.QueryString["search"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayItemSliceAndTotal = true })
     </div>
