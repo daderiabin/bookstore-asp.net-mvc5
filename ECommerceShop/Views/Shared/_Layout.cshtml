@@ -54,15 +54,28 @@
                         <ul class="dropdown-menu">
                             @if (Session["cart"] != null)
                             {
+                                <li class="divider"></li>
                                 foreach (Item product in (List<Item>)Session["cart"])
                                 {
                                     <li>
-                                        <a href="#">@product.Product.ProductName (@product.Quantity)</a>
-                                        <a href='@Url.Action("RemoveFromCart", "Home", new { productId = @product.Product.ProductId})'><i class="fa fa-times"></i></a>
-                                    </li>                                    
+                                        <a href='@Url.Action("RemoveFromCart", "Home", new { productId = @product.Product.ProductId})'>@product.Product.ProductName (@product.Quantity) <i class="fa fa-times"></i></a>
+                                    </li>
+
                                 }
+                                <li class="divider"></li>
+                                <li>
+                                    <p style="text-align:center">
+                                        <a class="btn btn-success" href='@Url.Action("Checkout", "Home")'>Checkout</a>
+                                    </p>
+                                </li>
+
                             }
-                            <li class="divider"></li>
+                            else
+                            {
+                                <li class="divider"></li>
+                                <li> <p style="text-align:center">No items in your cart.</p></li>
+                                <li class="divider"></li>
+                            }
                         </ul>
                     </li>
                 </ul>

@@ -15,6 +15,7 @@ namespace ECommerceShop.Controllers
         public ActionResult Index(string search, int? page)
         {
             int pageSize = 8; //products per page
+
             if (search != null)
             {
                 page = 1;
@@ -56,7 +57,6 @@ namespace ECommerceShop.Controllers
                             Product = product,
                             Quantity = currentQty + 1
                         });
-
                         break;
                     }
                     else
@@ -72,6 +72,7 @@ namespace ECommerceShop.Controllers
 
                 Session["cart"] = cart;
             }
+
             return Redirect("Index");
         }
 
@@ -98,6 +99,61 @@ namespace ECommerceShop.Controllers
             }
             
             return Redirect("Index");
+        }
+
+        public ActionResult Checkout()
+        {
+            return View();
+        }
+
+        public ActionResult Increase(int productId)
+        {
+            List<Item> cart = (List<Item>)Session["cart"];
+            var product = db.Tbl_Product.Find(productId);
+
+            foreach (var item in cart)
+            {
+                if (item.Product.ProductId == productId)
+                {
+                    item.Quantity += 1;
+                    break;
+                }
+            }
+
+            return Redirect("Checkout");
+        }
+
+        public ActionResult Decrease(int productId)
+        {
+            List<Item> cart = (List<Item>)Session["cart"];
+
+            foreach (var item in cart)
+            {
+                if (item.Product.ProductId == productId)
+                {
+                    if (item.Quantity > 0)
+                    {
+                        item.Quantity -= 1;
+                        if (item.Quantity == 0)
+                        {
+                            RemoveFromCart(productId);
+                        }
+                        break;
+                    }
+                    else
+                    {
+                        RemoveFromCart(productId);
+                        break;
+                    }
+                }
+            }
+
+            return Redirect("Checkout");
+        }
+
+        public ActionResult CheckoutDetails()
+        {
+            return View();
         }
 
         public ActionResult About()
