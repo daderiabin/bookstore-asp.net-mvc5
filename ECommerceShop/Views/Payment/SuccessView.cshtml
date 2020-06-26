@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "SuccessView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Session["cart"] = null;
+}
+
+<div class="alert alert-success">
+    <strong>Payment went through successfully!</strong>
+    <a class="btn btn-success" href="@Url.Action("Index","Home")">Take Me Home!</a>
+</div>
